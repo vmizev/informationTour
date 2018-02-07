@@ -1,0 +1,20 @@
+<div class="overlay-html" *ngIf="isShowed">
+  <div class="tour-container" [ngStyle]="positionStyles" (window:resize)="onResize($event)">
+    <div class="modal" fxLayout="column" fxLayoutAlign="space-between start">
+        <h2> {{ showedStep.title }} </h2>
+        <p> {{ showedStep.text }} </p>
+        <div class="links"  fxLayout="row" fxLayoutAlign="space-between center">
+          <div class="nav-links">
+            <a href="#" (click)="goBack()" *ngIf="currentStep > 1">Back</a>
+            <span>{{ currentStep }}/{{ stepsCount }}</span>
+            <a href="#" (click)="goNext()" *ngIf="currentStep < stepsCount">Next</a>
+          </div>
+          <div class="nav-close">
+            <a href="#" (click)="close()">Close</a>
+          </div>    
+        </div>
+      </div> 
+  </div>
+</div>
+
+

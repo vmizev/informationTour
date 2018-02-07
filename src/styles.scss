@@ -1,1 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+div {
+    box-sizing: border-box;
+}
+
+.wrapper {
+    height: 100vh;
+
+    .box {
+        height: 200px;
+        width: 200px;
+        border: 1px solid rgba(255, 0, 0, 0.342);
+        padding: 10px;
+        &.active {
+            background-color: #585550;
+            color: #fff;
+            border: 2px solid #09d009;
+            z-index: 101;
+        }
+    }
+    
+}

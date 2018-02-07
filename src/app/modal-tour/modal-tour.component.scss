@@ -1,0 +1,45 @@
+a{
+    color: #030181;
+    cursor: pointer;
+}
+
+span {
+    margin: 0 10px;
+}
+
+.overlay-html{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    z-index: 100;
+
+    .tour-container {
+        position: absolute;
+        // bottom: 0;
+        // right: 0;
+        width: 400px;
+        z-index: 1000;
+        background-color: cyan;
+        .modal {
+            // display: flex;
+            // align-items: center;
+            // flex-direction: column;
+            // max-width: 400px!important;
+            padding: 25px;
+        
+            h2 {
+                margin: 0; 
+            }
+            .links{
+                width: 100%;
+                font-variant: small-caps;
+                text-transform: uppercase;
+                font-size: 11px;    
+            }
+        }
+    }
+}
+
