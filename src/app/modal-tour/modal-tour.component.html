@@ -1,6 +1,6 @@
-<div class="overlay-html" *ngIf="isShowed">
+<div class="overlay-html" [hidden]="!isShowed">
   <div class="tour-container" #modalWindow [ngStyle]="positionStyles" (window:resize)="onResize($event)">
-    <div class="modal" fxLayout="column" fxLayoutAlign="space-between start">
+    <div class="modal" fxLayout="column" fxLayoutAlign="space-between start" *ngIf="showedStep">
         <h2> {{ showedStep.title }} </h2>
         <p> {{ showedStep.text }} </p>
         <div class="links"  fxLayout="row" fxLayoutAlign="space-between center">

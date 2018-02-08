@@ -18,16 +18,11 @@ span {
 
     .tour-container {
         position: absolute;
-        // bottom: 0;
-        // right: 0;
+        top: -1000px;
         width: 400px;
         z-index: 1000;
         background-color: cyan;
         .modal {
-            // display: flex;
-            // align-items: center;
-            // flex-direction: column;
-            // max-width: 400px!important;
             padding: 25px;
         
             h2 {

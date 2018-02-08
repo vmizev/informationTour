@@ -1,0 +1,30 @@
+[
+    {
+      "step": 1,
+      "title": "Title #1",
+      "text": "Text content of STEP-1.",
+      "position": "",
+      "elements": []
+    },
+    {
+      "step": 2,
+      "title": "Title #2",
+      "text": "STEP-2 content.",
+      "position": "",
+      "elements": []
+    },
+    {
+      "step": 3,
+      "title": "Title #3",
+      "text": "3-STEP custom text.",
+      "position": "",
+      "elements": []
+    },
+    {
+      "step": 4,
+      "title": "Title #4",
+      "text": "This is content of STEP-4",
+      "position": "",
+      "elements": []
+    }
+  ]

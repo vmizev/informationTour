@@ -1,9 +1,6 @@
 import { Steps } from './../shared/steps-model';
-import { Component, OnInit, Inject, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Inject, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { TourService } from '../shared/services/tour.service';
-import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-// import { ResizeService } from '../shared/services/resize.service';
 
 @Component({
   selector: 'app-modal-tour',
@@ -12,15 +9,15 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 })
 export class ModalTourComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('myWindow', {read: ElementRef}) myWindow: ElementRef;
+  @ViewChild('modalWindow', {read: ElementRef}) modalWindow: ElementRef;
 
   showedStep: Steps;
   stepsCount: number;
-  isShowed: boolean;
+  isShowed = false;
   positionStyles: object;
   debounceTimer;
 
-  constructor(private ts: TourService, private elem: ElementRef) {}
+  constructor(private ts: TourService) {}
 
   ngOnInit() {
     // Get step element
@@ -36,9 +33,9 @@ export class ModalTourComponent implements OnInit, AfterViewInit {
       }
     );
   }
+
   ngAfterViewInit() {
     this.stepsCount = this.ts.getStepsCount();
-    console.log(this.myWindow);
   }
 
   onResize(event) {
@@ -49,9 +46,11 @@ export class ModalTourComponent implements OnInit, AfterViewInit {
   goBack() {
     this.ts.previousStep();
   }
+
   goNext() {
     this.ts.nextStep();
   }
+
   close() {
     this.ts.closeTour();
   }
@@ -62,12 +61,21 @@ export class ModalTourComponent implements OnInit, AfterViewInit {
     // Get first element from elements[]
     const el = this.showedStep.elements[0].nativeElement;
 
+    // Get modal width and height for offsets
+    const modalHeight = this.modalWindow.nativeElement.clientHeight;
+    const modalWidth = this.modalWindow.nativeElement.clientWidth;
+
+    if (modalHeight === 0) {
+      setTimeout( () => this.setModalPosition(), 0);
+      return;
+    }
+
     // Set coordinates for modal
     switch (pos) {
       case 'top': {
         console.log('MODAL top');
         this.positionStyles = {
-          top : el.offsetTop - 140 - 10 + 'px',
+          top : el.offsetTop - modalHeight - 10 + 'px',
           left: el.offsetLeft  + 'px'
         };
       } break;
@@ -89,7 +97,7 @@ export class ModalTourComponent implements OnInit, AfterViewInit {
         console.log('MODAL left');
         this.positionStyles = {
           top : el.offsetTop  + 'px',
-          left: el.offsetLeft - 400 - 10 + 'px'
+          left: el.offsetLeft - modalWidth - 10 + 'px'
         };
       } break;
       default: {

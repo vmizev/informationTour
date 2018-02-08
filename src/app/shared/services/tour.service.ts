@@ -96,7 +96,6 @@ export class TourService {
       this.currentStep++;
       this.showStep(this.nextStep.bind(this));
     }
-
   }
 
   previousStep() {
@@ -115,6 +114,7 @@ export class TourService {
       });
     });
     this.visible = false;
+    this.currentStep = 1;
     // Emit false value to close tour
     this.open.emit(false);
   }
