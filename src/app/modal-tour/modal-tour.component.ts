@@ -1,5 +1,5 @@
 import { Steps } from './../shared/steps-model';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ElementRef, ViewChild } from '@angular/core';
 import { TourService } from '../shared/services/tour.service';
 import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -12,99 +12,57 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 })
 export class ModalTourComponent implements OnInit, AfterViewInit {
 
+  @ViewChild('myWindow', {read: ElementRef}) myWindow: ElementRef;
+
   showedStep: Steps;
   stepsCount: number;
-  currentStep = 1;
   isShowed: boolean;
-  stepCoords: any;
   positionStyles: object;
-  topPosition: string;
-  rightPosition: string;
-  bottomPosition: string;
-  leftPosition: string;
   debounceTimer;
 
-  baseWidth: number;
-  // currentWidth: number;
-  currentWidth: BehaviorSubject<number> = new BehaviorSubject<number>(document.body.clientWidth);
-
-  constructor(private ts: TourService) {}
+  constructor(private ts: TourService, private elem: ElementRef) {}
 
   ngOnInit() {
-    this.ts.showCurrentStep.subscribe(
-      value => {
-        this.showedStep = value;
-        // this.stepCoords = {
-        //   offsetHeight: this.showedStep.elements[0].nativeElement.offsetHeight,
-        //   offsetLeft: this.showedStep.elements[0].nativeElement.offsetLeft,
-        //   offsetTop: this.showedStep.elements[0].nativeElement.offsetTop,
-        //   offsetWidth: this.showedStep.elements[0].nativeElement.offsetWidth,
-        //   clientHeight: this.showedStep.elements[0].nativeElement.clientHeight,
-        //   clientLeft: this.showedStep.elements[0].nativeElement.clientLeft,
-        //   clientTop: this.showedStep.elements[0].nativeElement.clientTop,
-        //   clientWidth: this.showedStep.elements[0].nativeElement.clientWidth
-        // };
-
+    // Get step element
+    this.ts.showCurrentStep.subscribe( (stepItem: Steps) => {
+        this.showedStep = stepItem;
         this.setModalPosition();
-
-        this.baseWidth = document.body.clientWidth;
-        console.log('current1 ', this.currentWidth);
-
-
-        console.log('width', document.body.clientWidth);
-        console.log('stepCoords', this.stepCoords);
-        // this.getPosition()
-        // console.log('offsetHeight', this.showedStep.elements[0].nativeElement.offsetHeight);
-        // console.log('offsetLeft', this.showedStep.elements[0].nativeElement.offsetLeft);
-        // console.log('offsetTop', this.showedStep.elements[0].nativeElement.offsetTop);
-        // console.log('offsetWidth', this.showedStep.elements[0].nativeElement.offsetWidth);
       }
     );
-
+    // Show or hide overlay
     this.ts.open.subscribe(
       value => {
         this.isShowed = value;
-        // console.log('isShowed', this.isShowed);
       }
     );
   }
   ngAfterViewInit() {
     this.stepsCount = this.ts.getStepsCount();
-    // setTimeout( () => this.setModalPosition(this.showedStep.position), 0 );
-    // this.setModalPosition(this.showedStep.position);
+    console.log(this.myWindow);
   }
 
   onResize(event) {
-
     clearTimeout(this.debounceTimer);
     this.debounceTimer = setTimeout( () => this.setModalPosition(), 500 );
-
-
-
-    // this.currentWidth.next(event.target.innerWidth);
-    //  console.log('X', this.showedStep.elements[0].nativeElement.offsetLeft);
-    // this.setModalPosition();
-    // setTimeout( () => this.setModalPosition(), 3000 )
   }
 
   goBack() {
     this.ts.previousStep();
-    this.currentStep--;
-    // console.log('Go back!');
   }
   goNext() {
     this.ts.nextStep();
-    this.currentStep++;
-    // console.log('Go next!');
   }
   close() {
     this.ts.closeTour();
-    // console.log('Close!');
   }
 
   setModalPosition() {
     const pos = this.showedStep.position;
+
+    // Get first element from elements[]
     const el = this.showedStep.elements[0].nativeElement;
+
+    // Set coordinates for modal
     switch (pos) {
       case 'top': {
         console.log('MODAL top');
@@ -124,18 +82,14 @@ export class ModalTourComponent implements OnInit, AfterViewInit {
         console.log('MODAL bottom');
         this.positionStyles = {
           top : el.offsetTop + el.clientHeight + 10 + 'px',
-          // left: el['offsetLeft'] - el['offsetLeft'] + 10 + 'px'
           left: el.offsetLeft - (el.offsetLeft / 4) + 10 + 'px'
         };
-        console.log(this.positionStyles);
       } break;
       case 'left': {
         console.log('MODAL left');
         this.positionStyles = {
           top : el.offsetTop  + 'px',
-          left: el.offsetLeft - 400 - 10 + 'px',
-          // right: '',
-          // bottom: ''
+          left: el.offsetLeft - 400 - 10 + 'px'
         };
       } break;
       default: {
@@ -147,5 +101,4 @@ export class ModalTourComponent implements OnInit, AfterViewInit {
       }
     }
   }
-
 }

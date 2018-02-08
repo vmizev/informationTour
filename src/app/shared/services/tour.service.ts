@@ -46,8 +46,6 @@ export class TourService {
     setTimeout(() => { this.showTour(); }, 3000);
   }
 
-
-
   public addStep(element, step: number, stepPosition?: string) {
     const item: Steps = this.steps.find(( i ) => i.step === step);
 

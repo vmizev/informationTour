@@ -10,10 +10,8 @@ export class TourDirective implements AfterViewInit {
   @Input() stepPos: string;
 
   constructor(private elRef: ElementRef, private ts: TourService) { }
-  ngAfterViewInit(): void {
-    // console.log(this.elRef);
-    // console.log('step - ', this.step);
 
+  ngAfterViewInit(): void {
     let numberStep: number;
     let stepPosition: string;
 
