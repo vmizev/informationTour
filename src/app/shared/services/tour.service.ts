@@ -57,7 +57,10 @@ export class TourService {
   }
 
   showStep(handler) {
+    // Save element from steps[] with currentStep value
     const data = this.steps.find((item) => item.step === this.currentStep);
+
+    // If we have 1 or more nodes in elements[] set class 'active' for every element
     if (data.elements.length) {
       // Remove all classes 'active' from steps[]
       this.steps.forEach((item, index, arr) => {
@@ -69,6 +72,8 @@ export class TourService {
       data.elements.forEach((item, index, arr) => {
         item.nativeElement.classList.add('active');
       });
+
+      // Emit element to component
       this.showCurrentStep.emit(data);
     } else {
       // Remove all classes 'active' from steps[]
@@ -95,7 +100,7 @@ export class TourService {
   }
 
   previousStep() {
-    // We can call previousStep() only for 2 and higher step
+    // We can call previousStep() only for 2-d and higher step
     if (this.currentStep > 1) {
       this.currentStep--;
       this.showStep(this.previousStep.bind(this));
@@ -110,15 +115,14 @@ export class TourService {
       });
     });
     this.visible = false;
+    // Emit false value to close tour
     this.open.emit(false);
-    // console.log(`Tour activation: ${this.visible}`);
   }
 
   showTour() {
     this.visible = true;
+    // Emit true value to open tour
     this.open.emit(true);
-    // console.log(`Tour activation: ${this.visible}`);
-    // console.log(this.steps);
     this.showStep(this.nextStep.bind(this));
   }
 
