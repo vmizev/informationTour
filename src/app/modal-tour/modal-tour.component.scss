@@ -36,5 +36,15 @@ span {
             }
         }
     }
+    .go-to{
+        position: absolute;
+        top: 30%;
+        left: 2%;
+        button {
+            & + button {
+                margin-top: 15px;
+            }
+        }
+    }
 }
 

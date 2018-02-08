@@ -56,6 +56,11 @@ export class TourService {
     item.elements.push(element);
   }
 
+  goToStep(n) {
+    this.currentStep = n;
+    this.showStep(this.nextStep);
+  }
+
   showStep(handler) {
     // Save element from steps[] with currentStep value
     const data = this.steps.find((item) => item.step === this.currentStep);

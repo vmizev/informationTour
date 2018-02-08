@@ -9,7 +9,7 @@ import { TourService } from '../shared/services/tour.service';
 })
 export class ModalTourComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('modalWindow', {read: ElementRef}) modalWindow: ElementRef;
+  @ViewChild('modalWindow') modalWindow: ElementRef;
 
   showedStep: Steps;
   stepsCount: number;
@@ -36,6 +36,10 @@ export class ModalTourComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.stepsCount = this.ts.getStepsCount();
+  }
+
+  goToStep(n) {
+    this.ts.goToStep(n);
   }
 
   onResize(event) {
