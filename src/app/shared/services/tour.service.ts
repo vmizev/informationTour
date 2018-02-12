@@ -24,7 +24,7 @@ export class TourService {
   }
 
   getData() {
-    const dataUrl = './assets/step-list1.json';
+    const dataUrl = './assets/step-list.json';
     return this.http.get<Steps[]>(dataUrl);
   }
 
