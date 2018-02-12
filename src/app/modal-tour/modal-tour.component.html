@@ -5,9 +5,9 @@
         <p> {{ showedStep.text }} </p>
         <div class="links"  fxLayout="row" fxLayoutAlign="space-between center">
           <div class="nav-links">
-            <a (click)="goBack()" *ngIf="showedStep.step > 1">Back</a>
+            <a (click)="goBack()" [hidden]="showedStep.step === 1">Back</a>
             <span>{{ showedStep.step }}/{{ stepsCount }}</span>
-            <a (click)="goNext()" *ngIf="showedStep.step < stepsCount">Next</a>
+            <a (click)="goNext()" [hidden]="showedStep.step === stepsCount">Next</a>
           </div>
           <div class="nav-close">
             <a (click)="close()">Close</a>

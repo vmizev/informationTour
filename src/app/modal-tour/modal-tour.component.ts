@@ -23,7 +23,8 @@ export class ModalTourComponent implements OnInit, AfterViewInit {
     // Get step element
     this.ts.showCurrentStep.subscribe( (stepItem: Steps) => {
         this.showedStep = stepItem;
-        this.setModalPosition();
+        // this.setModalPosition();
+        setTimeout( () => this.setModalPosition(), 0);
       }
     );
     // Show or hide overlay
@@ -35,7 +36,8 @@ export class ModalTourComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.stepsCount = this.ts.getStepsCount();
+    setTimeout( () => this.stepsCount = this.ts.getStepsCount(), 0 );
+    // this.stepsCount = this.ts.getStepsCount();
   }
 
   goToStep(n) {

@@ -1,0 +1,30 @@
+[
+  {
+    "step": 1,
+    "title": "Title #1",
+    "text": "Text content of STEP-1.",
+    "position": "",
+    "elements": []
+  },
+  {
+    "step": 2,
+    "title": "Title #2",
+    "text": "STEP-2 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde facere distinctio accusantium nesciunt? ullam suscipit, minima, rem sint eveniet sed illo. Consectetur.",
+    "position": "",
+    "elements": []
+  },
+  {
+    "step": 3,
+    "title": "Title #3",
+    "text": "3-STEP Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis consequuntur quasi eligendi sequi neque quidem ipsa aliquam minus id nisi.",
+    "position": "",
+    "elements": []
+  },
+  {
+    "step": 4,
+    "title": "Title #4",
+    "text": "Lorem ipsum dolor sit, amet consectetur adipisicing elit.Lorem ipsum dolor sit, amet consectetur adipisicing elit.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Lorem ipsum dolor sit, amet consectetur adipisicing elit.Lorem ipsum dolor sit, amet consectetur adipisicing elit. STEP-4",
+    "position": "",
+    "elements": []
+  }
+]

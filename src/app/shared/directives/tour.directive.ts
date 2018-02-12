@@ -19,6 +19,7 @@ export class TourDirective implements AfterViewInit {
 
     numberStep = Number(this.step);
 
-    this.ts.addStep(this.elRef, numberStep, stepPosition);
+    setTimeout( () => this.ts.addStep(this.elRef, numberStep, stepPosition), 0 ) ;
+    // this.ts.addStep(this.elRef, numberStep, stepPosition);
   }
 }
