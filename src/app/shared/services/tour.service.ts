@@ -1,12 +1,14 @@
 import { Steps } from './../steps-model';
 import { ModalTourComponent } from './../../modal-tour/modal-tour.component';
 import { Injectable, EventEmitter, Output } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable()
 export class TourService {
-
-  dataUrl = './assets/step-list.json';
 
   open: EventEmitter<boolean> = new EventEmitter();
   showCurrentStep: EventEmitter<Steps> = new EventEmitter();
@@ -22,11 +24,12 @@ export class TourService {
   }
 
   getData() {
-    return this.http.get<Steps[]>(this.dataUrl);
+    const dataUrl = './assets/step-list1.json';
+    return this.http.get<Steps[]>(dataUrl);
   }
 
   initData() {
-    this.getData().subscribe(data => this.steps = data);
+    this.getData().subscribe(data => this.steps = data, err => console.log(err));
   }
 
   public addStep(element, step: number, stepPosition?: string) {
